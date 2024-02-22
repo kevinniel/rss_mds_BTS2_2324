@@ -23,4 +23,39 @@ class CategoryController extends Controller
         // dd($categories); 
         return view('categories.index', compact('categories', 'toto'));
     }
+
+    public function create()
+    {
+        $parent_categories = Category::where('parent_id', null)->get();
+        return view('categories.create', compact('parent_categories'));
+    }
+
+    public function store(Request $request)
+    {
+        Category::create($request->all());
+        return redirect()->route('category.index');
+    }
+
+    public function edit($id)
+    {
+        $category = Category::find($id);
+        $parent_categories = Category::where('parent_id', null)->get();
+        return view('categories.edit', compact('category', 'parent_categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+        $category->update($request->all());
+
+        return redirect()->route('category.index');
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+
+        return redirect()->route('category.index');
+    }
 }

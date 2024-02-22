@@ -28,7 +28,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categorie.index');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/categories/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/categories/{id}/show', [CategoryController::class, 'show'])->name('category.show');
+    Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/categories/{id}/update', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/categories/{id}/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 });
 
 require __DIR__.'/auth.php';

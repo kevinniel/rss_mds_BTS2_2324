@@ -1,15 +1,30 @@
 <h1>categories</h1>
 <hr>
-@foreach($categories as $category)
-    <p>{{ $category->name }}</p>
-    <p>{{ $category->description }}</p>
-    @if($category->children)
-        @foreach($category->children as $child)
-            <p>{{ $child->name }}</p>
-            <p>{{ $child->description }}</p>
-        @endforeach
-    @endif
-@endforeach
+<a href="{{ route('category.create') }}">Ajouter</a>
+<hr>
+<ul>
+    @foreach($categories as $category)
+        <li>
+            {{ $category->name }} | <a href="{{ route('category.edit', $category->id) }}">Modifier</a> | <form action="{{ route('category.destroy', $category->id) }}" method="POST" style="display: inline-block;">@csrf @method('DELETE') <input type="submit" value="Supprimer"></form>
+            @if($category->children)
+                <ul>
+                    @foreach($category->children as $child)
+                        <li>
+                            {{ $child->name }} | <a href="{{ route('category.edit', $child->id) }}">Modifier</a> | <form action="{{ route('category.destroy', $child->id) }}" method="POST" style="display: inline-block;">@csrf @method('DELETE') <input type="submit" value="Supprimer"></form>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </li>
+    @endforeach
+</ul>
+
+
+{{-- <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <input type="submit" value="Supprimer">
+</form> --}}
 
 {{-- {{ $toto }} --}}
 
