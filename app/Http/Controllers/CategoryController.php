@@ -9,7 +9,15 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        // BASE
+        // $categories = Category::all();
+        // dd($categories[0]->children);
+        // dd($categories[7]->parent);
+
+        // BONNE MANIERE
+        $categories = Category::where('parent_id', null)->with('children')->get();
+        dd($categories[0]);
+
         $toto = "toto";
         // dd($categories); 
         return view('categories.index', compact('categories', 'toto'));
