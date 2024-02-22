@@ -15,8 +15,9 @@ class CategoryController extends Controller
         // dd($categories[7]->parent);
 
         // BONNE MANIERE
+        // $categories = Category::where('parent_id', null)->get();
         $categories = Category::where('parent_id', null)->with('children')->get();
-        dd($categories[0]);
+        // dd($categories[0]);
 
         $toto = "toto";
         // dd($categories); 

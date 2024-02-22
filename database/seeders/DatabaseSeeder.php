@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(10)->create();
-        Category::factory(4)->create();
-        for($i = 0; $i < 20; $i++){
+        Category::factory(5000)->create();
+        for($i = 0; $i < 2000; $i++){
             Category::factory(1)->create([
-                'parent_id' => random_int(1, 4),
+                'parent_id' => random_int(1, 5000),
             ]);
         }
 

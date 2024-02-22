@@ -3,9 +3,15 @@
 @foreach($categories as $category)
     <p>{{ $category->name }}</p>
     <p>{{ $category->description }}</p>
+    @if($category->children)
+        @foreach($category->children as $child)
+            <p>{{ $child->name }}</p>
+            <p>{{ $child->description }}</p>
+        @endforeach
+    @endif
 @endforeach
 
-{{ $toto }}
+{{-- {{ $toto }} --}}
 
 
 {{-- 
